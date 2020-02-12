@@ -1,13 +1,13 @@
 import express from "express";
-
-const PORT = 3000;
+import consign from "consign";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.json({ api_status: "API OK" });
-});
+app.set("json spaces", 4);
 
-app.listen(PORT, () => {
-  console.log(`API started at http://localhost:${PORT}`);
-});
+consign()
+  .include("models")
+  .then("libs/middlewares.js")
+  .then("routes")
+  .then("libs/boot.js")
+  .into(app);
