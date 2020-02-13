@@ -1,9 +1,7 @@
-module.exports = {
-  database: "truck_pad",
-  username: "postgres",
-  password: "postgres",
-  params: {
-    dialect: "postgres",
-    host: "localhost"
+module.exports = app => {
+  const env = process.env.NODE_ENV;
+  if (env) {
+    return require(`./config.${env}.js`);
   }
+  return require(`./config.development.js`);
 };
