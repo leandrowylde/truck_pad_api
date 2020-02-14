@@ -1,7 +1,9 @@
 module.exports = app => {
-  app.db.sequelize.sync().done(() => {
-    app.listen(app.get("port"), () => {
-      console.log(`API Started at http://localhost:${app.get("port")}`);
+  if (process.env.NODE_ENV !== "test") {
+    app.db.sequelize.sync().done(() => {
+      app.listen(app.get("port"), () => {
+        console.log(`API Started at port :${app.get("port")}`);
+      });
     });
-  });
+  }
 };
