@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "db_drop": "NODE_ENV=test npx sequelize-cli db:drop",
+    "db_create": "NODE_ENV=test npx sequelize-cli db:create",
+    "db_migrate": "NODE_ENV=test npx sequelize-cli db:migrate",
+    "db_seed": "NODE_ENV=test npx sequelize-cli db:seed:all",
+    "db:migrate": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "pretest": "yarn db_drop && yarn db_create && yarn db_migrate && yarn db_seed"
   },
   "repository": {
     "type": "git",
@@ -25,13 +31,17 @@
     "@babel/preset-env": "^7.8.4",
     "babel-jest": "^25.1.0",
     "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
     "consign": "^0.1.6",
     "express": "^4.17.1",
+    "global": "^4.4.0",
+    "lodash": "^4.17.15",
     "nodemon": "^2.0.2",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.4",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^5.5.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "jest": "^25.1.0"
