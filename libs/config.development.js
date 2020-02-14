@@ -1,5 +1,5 @@
 module.exports = {
-  database: "truck_pad",
+  database: "truck_pad_dev",
   username: "postgres",
   password: "postgres",
   params: {

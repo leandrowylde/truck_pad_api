@@ -3,10 +3,7 @@ import path from "path";
 import Sequelize from "sequelize";
 
 let db = null;
-// const config = require("./libs/config.js");
-// let sequelize = null;
 
-//Módulo para configuração do Sequelize com Postgres
 module.exports = app => {
   if (!db) {
     const config = app.libs.config;
@@ -27,9 +24,9 @@ module.exports = app => {
       const model = sequelize.import(modelDir);
       db.models[model.name] = model;
     });
-    // Object.keys(db.models).forEach(key => {
-    //   db.models[key].associate(db.models);
-    // });
+    Object.keys(db.models).forEach(key => {
+      db.models[key].associate(db.models);
+    });
   }
   return db;
 };
